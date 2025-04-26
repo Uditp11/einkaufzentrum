@@ -3,17 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Me - Pavithra Purushothaman</title>
+  <title>About Pavithra Purushothaman</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: linear-gradient(135deg, #e0f7fa, #f1f8e9);
       display: flex;
+      flex-direction: column;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      padding: 2rem 1rem;
     }
 
     .card {
@@ -25,21 +33,32 @@
       max-width: 600px;
       text-align: center;
       transition: transform 0.3s ease;
+      margin-bottom: 2rem;
     }
 
     .card:hover {
       transform: scale(1.02);
     }
 
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 3px solid #439247;
+    }
+
     .header {
       font-size: 2rem;
       color: #439247;
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       font-weight: 600;
     }
 
     .info {
       text-align: left;
+      margin: 1.5rem 0; /* Adds space above and below info section */
     }
 
     .info p {
@@ -61,6 +80,32 @@
       color: #555;
     }
 
+    .back-button {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #439247;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+
+    .back-button:hover {
+      background-color: #2e7d32;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888;
+      padding: 1rem;
+      background-color: transparent;
+    }
+
     @media (max-width: 600px) {
       .card {
         padding: 2rem 1.5rem;
@@ -69,19 +114,32 @@
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="header">👩‍💻 About Me</div>
-    <div class="info">
-      <p><strong>Name:</strong> Pavithra Purushothaman</p>
-      <p><strong>Matriculation Number:</strong> 1535949</p>
-      <p><strong>Email:</strong> <a href="mailto:pavithra.purushothaman@informatik.hs-fulda.de">pavithra.purushothaman@informatik.hs-fulda.de</a></p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/pavithra19" target="_blank">github.com/pavithra19</a></p>
-      <p><strong>Team Role:</strong> Team Lead</p>
-    </div>
 
-    <div class="about-section">
-      I'm a Master's student in Global Software Development currently in my second semester. I’m contributing to the product development in our team project and love working on real-world software collaboration in distributed teams.
+  <div class="main-content">
+    <div class="card">
+      <img src="images/pavithra_profile.jpeg" alt="Pavithra Purushothaman Profile Picture" class="profile-pic" />
+
+      <div class="header">👩‍💻 Hallo, I am Pavithra!</div>
+
+      <div class="info">
+        <p><strong>Full Name:</strong> Pavithra Purushothaman</p>
+        <p><strong>Matriculation Number:</strong> 1535949</p>
+        <p><strong>Email:</strong> <a href="mailto:pavithra.purushothaman@informatik.hs-fulda.de">pavithra.purushothaman@informatik.hs-fulda.de</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/pavithra-uni" target="_blank">github.com/pavithra-uni</a></p>
+        <p><strong>Team Role:</strong> Team Lead</p>
+      </div>
+
+      <div class="about-section">
+        I'm a Master's student in Global Software Development currently in my second semester. I’m contributing to the product development in our team project and love working on real-world software collaboration in distributed teams.
+      </div>
+
+      <a href="aboutus.html" class="back-button">← Back to About Us</a>
     </div>
   </div>
+
+  <footer>
+    © 2025 <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Disclaimer: This website is developed by Fulda Summer 2025 GDSD Project Team 4.
+  </footer>
+
 </body>
 </html>
