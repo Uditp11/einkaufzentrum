@@ -12,4 +12,8 @@
 
 4. Udit Parihar
    udit.parihar@informatik.hs-fulda.de
-   Github: https://github.com/UditPariharHS   
+   Github: https://github.com/UditPariharHS
+
+5. Ayush Kaushik
+   ayush.kaushik@informatik.hs-fulda.de
+   Github: https://github.com/ayushk-404   
