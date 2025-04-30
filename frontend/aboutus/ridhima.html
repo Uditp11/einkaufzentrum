@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Me - Ridhima Tigadi</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     body {
       margin: 0;
@@ -27,6 +30,7 @@
       text-align: center;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       border: 1px solid #e6f5e6;
+      margin:auto;
     }
 
     .card:hover {
@@ -68,8 +72,15 @@
     }
 
     @keyframes sparkle {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
     }
 
     .info {
@@ -183,25 +194,7 @@
       transform: translateY(-2px);
     }
 
-    .footer {
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid #e0e0e0;
-      font-size: 0.85rem;
-      color: #555;
-      text-align: center;
-    }
 
-    .footer a {
-      color: #66cc33;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer a:hover {
-      color: #336622;
-      text-decoration: underline;
-    }
 
     @media (max-width: 600px) {
       .card {
@@ -231,31 +224,42 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <img src="images/ridhima-profile.jpeg" alt="Ridhima Tigadi Profile Picture" class="profile-pic">
-    <div class="header">
-      <i class="fas fa-star"></i>
-      Hey, I'm Ridhima!
+
+  <div style="position: relative; width: 100%;">
+    <div class="card">
+      <img src="../images/ridhima-profile.jpeg" alt="Ridhima Tigadi Profile Picture" class="profile-pic">
+      <div class="header">
+        <i class="fas fa-star"></i>
+        Hey, I'm Ridhima!
+      </div>
+      <div class="info">
+        <p><i class="fas fa-user"></i><strong>Name:</strong> Ridhima Tigadi</p>
+        <p><i class="fas fa-envelope"></i><strong>Email:</strong> <a
+            href="mailto:ridhima.tigadi@informatik.hs-fulda.de">ridhima.tigadi@informatik.hs-fulda.de</a></p>
+        <p><i class="fab fa-linkedin"></i><strong>LinkedIn:</strong> <a
+            href="https://www.linkedin.com/in/ridhima-tigadi-45ab5616b/"
+            target="_blank">linkedin.com/in/ridhima-tigadi</a></p>
+        <p><i class="fas fa-laptop-code"></i><strong>Team Role:</strong> Backend Lead</p>
+      </div>
+      <div class="fun-facts">
+        <h3><i class="fas fa-heart"></i> A Bit About Me</h3>
+        <ul>
+          <li><i class="fas fa-utensils"></i>I love cooking spicy Indian dishes – my butter chicken is a hit!</li>
+          <li><i class="fas fa-cat"></i>Not a cat person, but I’m hooked on cute cat memes on Instagram.</li>
+          <li><i class="fas fa-graduation-cap"></i>Studying for my Master’s in Global Software Development in Fulda.</li>
+        </ul>
+      </div>
+      <a href="aboutus.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Team</a>
     </div>
-    <div class="info">
-      <p><i class="fas fa-user"></i><strong>Name:</strong> Ridhima Tigadi</p>
-      <p><i class="fas fa-envelope"></i><strong>Email:</strong> <a href="mailto:ridhima.tigadi@informatik.hs-fulda.de">ridhima.tigadi@informatik.hs-fulda.de</a></p>
-      <p><i class="fab fa-linkedin"></i><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ridhima-tigadi-45ab5616b/" target="_blank">linkedin.com/in/ridhima-tigadi</a></p>
-      <p><i class="fas fa-laptop-code"></i><strong>Team Role:</strong> Backend Lead</p>
-    </div>
-    <div class="fun-facts">
-      <h3><i class="fas fa-heart"></i> A Bit About Me</h3>
-      <ul>
-        <li><i class="fas fa-utensils"></i>I love cooking spicy Indian dishes – my butter chicken is a hit!</li>
-        <li><i class="fas fa-cat"></i>Not a cat person, but I’m hooked on cute cat memes on Instagram.</li>
-        <li><i class="fas fa-graduation-cap"></i>Studying for my Master’s in Global Software Development in Fulda.</li>
-      </ul>
-    </div>
-    <a href="aboutus.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Team</a>
-    <div class="footer">
-      © 2024 Copyright <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Alle Rechte vorbehalten.
-    </div>
-  </div>
+  <footer
+    style="background-color:#28a745; color: white; text-align: center; padding: 10px; position: absolute; bottom: 0; width: 100%;">
+    © 2025 <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Disclaimer: This website is
+    developed by Fulda Summer 2025 GDSD Project Team 4 for Educational Purposes.
+  </footer>
+</div>
+  
 </body>
+
 </html>
