@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Fulda Summer 2025 Team 4</title>
   <style>
+    :root {
+      --footer-bg: #439247;
+      --footer-text: #ffffff;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -13,7 +18,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      min-height: 100vh;     
     }
 
     header {
@@ -95,6 +100,15 @@
         width: 100%;
       }
     }
+
+    footer {
+      margin-top: auto;          
+      width: 100%;
+      background-color: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 1rem 0;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -135,7 +149,7 @@
     <!-- Member 5 -->
     <div class="member-card">
       <div class="member-name">Udit Parihar</div>
-      <div class="member-role">Backend</div>
+      <div class="member-role">Backend Developer</div>
       <a href="udit.html" class="visit-btn">View Profile</a>
     </div>
 
@@ -148,8 +162,9 @@
   </div>
 
   <footer>
-    © 2025 <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Disclaimer: This website is developed by Fulda Summer 2025 GDSD Project Team 4 for Educational Purposes.
+    <div class="container">
+      © 2025 <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Disclaimer: This website is developed by Fulda Summer 2025 GDSD Project Team 4 for Educational Purposes.
+    </div>
   </footer>
-
 </body>
 </html>
