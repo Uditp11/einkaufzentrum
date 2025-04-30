@@ -10,4 +10,6 @@
    akhil.baiju@informatik.hs-fulda.de
    GitHub: https://github.com/Akhil-GSD
 
-   
+4. Udit Parihar
+   udit.parihar@informatik.hs-fulda.de
+   Github: https://github.com/UditPariharHS   
