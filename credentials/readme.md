@@ -2,10 +2,10 @@
 Follow these steps to securely connect to your Ubuntu-based AWS EC2 instance via SSH.
 
 ## ✅ Prerequisites
-🟠 EC2 instance running Ubuntu
-🔑 SSH key pair (.pem file) from AWS
-🌐 Public IP or Public DNS of the instance
-💻 Terminal (Linux/macOS) or SSH client (Windows: e.g., Git Bash / PuTTY)
+- 🟠 EC2 instance running **Ubuntu**
+- 🔑 SSH key pair (.pem file) from AWS
+- 🌐 Public IP or Public DNS of the instance
+- 💻 Terminal (Linux/macOS) or SSH client (Windows: e.g., Git Bash / PuTTY)
 
 ## 🛠️ SSH Connection Steps
 1. Set correct permissions for the key file:
@@ -18,10 +18,10 @@ Follow these steps to securely connect to your Ubuntu-based AWS EC2 instance via
 >> ssh -i ~/Downloads/my-key.pem ubuntu@18.222.123.45
 
 3. Verify the fingerprint (only the first time):
-Type **yes** when prompted to confirm the server identity.
+- Type **yes** when prompted to confirm the server identity.
 
 4. Access granted:
-You will now have shell access to the Ubuntu EC2 instance! 🎉
+- You will now have shell access to the Ubuntu EC2 instance! 🎉
 
 ## DB Details
 1. DB instance identifier- team4-db
