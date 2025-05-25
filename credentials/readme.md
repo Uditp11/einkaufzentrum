@@ -15,7 +15,7 @@ Follow these steps to securely connect to your Ubuntu-based AWS EC2 instance via
 >> ssh -i path/to/your-key.pem ubuntu@<your-ec2-public-dns>
 
 **Example:**
->> ssh -i ~/Downloads/my-key.pem ubuntu@ec2-52-57-23-50.eu-central-1.compute.amazonaws.com
+>> ssh -i ~/Downloads/my-key.pem ubuntu@ec2-54-159-18-140.compute-1.amazonaws.com
 
 3. Verify the fingerprint (only the first time):
 - Type **yes** when prompted to confirm the server identity.
