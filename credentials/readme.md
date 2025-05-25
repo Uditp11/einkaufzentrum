@@ -28,3 +28,4 @@ Follow these steps to securely connect to your Ubuntu-based AWS EC2 instance via
 2. Master username- admin
 3. Master Password- Gdsdteam4_123
 4. DB name- team4appdb
+5. RDS endpoint- team4-db.ck1s0emywc4t.us-east-1.rds.amazonaws.com
