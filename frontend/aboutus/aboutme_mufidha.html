@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Me - Mufidha Sulfikerali</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-green: #4caf50;
+      --light-green: #e8f5e9;
+      --accent-green: #66bb6a;
+      --dark-text: #2e7d32;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, var(--light-green), #f1f8e9);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      background: var(--card-bg);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      max-width: 1000px;
+      width: 95%;
+      margin-bottom: 1.5rem;
+    }
+
+    .left-section {
+      background-color: #f0fdf4;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .profile-pic {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 6px solid var(--main-green);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .right-section {
+      flex: 2;
+      padding: 2rem;
+    }
+
+    .header {
+      font-size: 2rem;
+      color: var(--main-green);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .tab {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 25px;
+      background-color: #c8e6c9;
+      color: var(--dark-text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .tab.active {
+      background-color: var(--main-green);
+      color: white;
+    }
+
+    .content {
+      display: none;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .content.active {
+      display: block;
+    }
+
+    .info p {
+      margin: 0.8rem 0;
+      font-size: 1.05rem;
+      color: #444;
+    }
+
+    .info strong {
+      color: var(--dark-text);
+    }
+
+    .info a {
+      color: var(--main-green);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .info a:hover {
+      text-decoration: underline;
+    }
+
+    .about-section {
+      margin-top: 1.2rem;
+      font-style: italic;
+      color: #444;
+    }
+
+    ul {
+      list-style-type: square;
+      padding-left: 1.2rem;
+      color: #444;
+    }
+
+    footer {
+      font-size: 0.9rem;
+      color: #555;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .left-section {
+        padding: 1rem;
+      }
+    .profile-pic {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border: 6px solid var(--main-green);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 0 !important;
+}
+
+      .tabs {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+<a href="aboutus.html" style="position: fixed; top: 20px; left: 20px; background-color:#28a745; color: white; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-size: 14px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+         ← Back
+    </a>
+  <div class="container">
+    <div class="left-section">
+      <img src="../images/mufidha.jpeg" alt="Mufidha Sulfikerali" class="profile-pic" />
+    </div>
+
+    <div class="right-section">
+      <div class="header">👩‍💻 About Me</div>
+
+      <div class="tabs">
+        <button class="tab active" onclick="showTab(event, 'about')">About</button>
+        <button class="tab" onclick="showTab(event, 'skills')">Skills</button>
+        <button class="tab" onclick="showTab(event, 'hobbies')">Hobbies</button>
+      </div>
+
+      <div id="about" class="content active">
+        <div class="info">
+          <p><strong>Name:</strong> Mufidha Sulfikerali</p>
+          <p><strong>Matriculation Number:</strong> 1538768</p>
+          <p><strong>Email:</strong> <a href="mailto:mufidha.sulfikerali@informatik.hs-fulda.de">mufidha.sulfikerali@informatik.hs-fulda.de</a></p>
+          <p><strong>GitHub:</strong> <a href="https://github.com/MufidhaSulfikerali17" target="_blank">github.com/MufidhaSulfikerali17</a></p>
+          <p><strong>Team Role:</strong> Github Master</p>
+        </div>
+        <div class="about-section">
+          I'm a Master's student in Global Software Development. I manage our team’s GitHub repository, review and merge pull requests, enforce coding standards, and ensure high code quality and collaboration. In addition, I am responsible for setting up cloud infrastructure and automating deployment to support scalable and reliable software delivery.
+        </div>
+      </div>
+
+      <div id="skills" class="content">
+        <ul>
+          <li>Version Control (Git & GitHub)</li>
+          <li>Agile/Scrum Project Management</li>
+          <li>Cloud Infrastructure Automation</li>
+          <li>ServiceNow Incident and Release Management</li>
+          <li>Powershell scripting, IAC, and PaaS modernization</li>
+        </ul>
+      </div>
+
+      <div id="hobbies" class="content">
+        <ul>
+          <li>Reading books📚</li>
+          <li>Gardening🌿</li>
+          <li>Exploring new cultures through food🍱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Hochschule Fulda. Disclaimer: This website is developed by Fulda Summer 2025 TeamProjekt Group 4 for Educational Purposes.
+  </footer>
+
+  <script>
+    function showTab(event, tabId) {
+      document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

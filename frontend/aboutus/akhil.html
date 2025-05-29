@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Akhil Baiju</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #dfeeff, #f2f7ff);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      overflow: hidden;
+    }
+
+    .card {
+      background: linear-gradient(145deg, #e0ecf8, #f5faff);
+      width: 100%;
+      max-width: 1000px;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      padding: 20px 30px;
+      background-image: url('0205b319-306a-4b0e-8ce6-be6310cb6efb.png');
+      background-repeat: no-repeat;
+      background-position: bottom right;
+      background-size: 200px;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .profile-header img {
+      width: 150px;
+      height: auto;
+      border: 4px solid #d0d0d0;
+      border-radius: 12px;
+    }
+
+    .profile-info h1 {
+      margin: 0;
+      font-size: 28px;
+      color: #1f2d40;
+    }
+
+    .role {
+      background-color: #ffffff;
+      color: #0a6c80;
+      border: 2px solid #0a6c80;
+      display: inline-block;
+      padding: 4px 14px;
+      margin-top: 10px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #333;
+      line-height: 1.5;
+      margin: 14px 0;
+      text-align: justify;
+    }
+
+    .links {
+      margin-top: 16px;
+    }
+
+    .links a {
+      margin: 0 8px;
+      text-decoration: none;
+      color: #007acc;
+      font-weight: 500;
+    }
+
+    .info-box {
+      margin-top: 18px;
+      font-size: 13px;
+      color: #444;
+      line-height: 1.4;
+    }
+
+    .site-footer {
+      background-color: #28a745;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      font-size: 13px;
+      width: 100%;
+    }
+
+    .site-footer a {
+      color: #ffffff;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    .site-footer a:hover {
+      text-decoration: none;
+    }
+
+    @media (max-height: 700px) {
+      .card {
+        padding: 15px 20px;
+      }
+
+      .profile-header img {
+        width: 120px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content-wrapper">
+    <div class="card">
+      <div class="profile-header">
+        <img src="../images/akhil_profile.jpeg" alt="Akhil Baiju">
+        <div class="profile-info">
+          <h1>Akhil Baiju</h1>
+          <div class="role">💾 Database Manager</div>
+        </div>
+      </div>
+
+      <p>
+        Hello! I’m Akhil Baiju, originally from Kerala, India. I completed my early education and earned a Bachelor's
+        degree in Computer Application in Kerala. Following my graduation, I worked for over two years as an Oracle
+        Database Administrator at Capgemini in Bangalore, where I gained hands-on experience in enterprise-level
+        database systems and infrastructure.
+      </p>
+
+      <p>
+        Eager to expand my global exposure and deepen my understanding of modern software practices, I moved to Germany
+        in the Winter Semester of 2024 to pursue a Master's degree in Global Software Development at Hochschule Fulda.
+      </p>
+
+      <p>
+        This "About Me" page is part of a collaborative academic project for the course Global Distributed Software
+        Development, where I am responsible for managing and structuring the database architecture of our team’s
+        application. I’m passionate about building reliable back-end systems and enjoy bridging the gap between data and
+        meaningful software solutions.
+      </p>
+      <div class="links">
+        <a href="https://github.com/AkhilB6" target="_blank">GitHub</a> |
+        <a href="https://www.linkedin.com/in/akhil-baiju-102984220" target="_blank">LinkedIn</a>
+      </div>
+
+      <div class="info-box">
+        Matrikelnummer: 1542318<br>
+        FD-Number: fd0002054<br>
+        Email: akhil.baiju@informatik.hs-fulda.de
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    © 2025 <a href="https://www.hs-fulda.de/" target="_blank">Hochschule Fulda</a>. Disclaimer: This website is
+    developed by Fulda Summer 2025 GDSD Project Team 4 for Educational Purposes.
+  </footer>
+</body>
+
+</html>
