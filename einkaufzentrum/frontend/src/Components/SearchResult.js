@@ -4,6 +4,8 @@ import ProductCard from './ProductCard';
 import '../Style/ProductExplore.css';
 import Footer from './Footer';
 import { useSearchParams } from 'react-router-dom';
+import Form from 'react-bootstrap/Form';
+import RangeSlider from 'react-bootstrap/FormRange';
 
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
@@ -11,6 +13,11 @@ const SearchResult = () => {
   const [loading, setLoading]   = useState(true);
   const [error, setError]       = useState(null);
   const [showFilter, setShowFilter] = useState(false);
+  
+  // Filter states
+  const [priceRange, setPriceRange] = useState([0, 1000]);
+  const [condition, setCondition] = useState('all');
+  const [color, setColor] = useState('all');
 
   const searchQuery = searchParams.get('q') || '';
   const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
@@ -57,6 +64,25 @@ const SearchResult = () => {
     }
   }, [searchQuery, backendUrl]);
 
+  const handlePriceChange = (value, bound) => {
+    if (bound === 'min') {
+      setPriceRange([Math.min(value, priceRange[1]), priceRange[1]]);
+    } else {
+      setPriceRange([priceRange[0], Math.max(value, priceRange[0])]);
+    }
+  };
+
+  const applyFilters = () => {
+    // Add filter logic here
+    setShowFilter(false);
+  };
+
+  const resetFilters = () => {
+    setPriceRange([0, 1000]);
+    setCondition('all');
+    setColor('all');
+  };
+
   return (
     <div className="page-container">
       <div className="search-results-container">
@@ -93,7 +119,6 @@ const SearchResult = () => {
 
         {showFilter && (
           <div className="filter-section">
-            {/* Filter UI unchanged */}
             <div className="filter-header">
               <h3>Filter Options</h3>
               <button
@@ -105,13 +130,100 @@ const SearchResult = () => {
             </div>
 
             <div className="filter-options">
-              {/* Price Range, Condition, Color */}
+              <div className="filter-grid">
+                {/* Price Range Filter */}
+                <div className="filter-group">
+                  <h4>Price Range</h4>
+                  <div className="price-inputs">
+                    <Form.Group className="mb-3">
+                      <Form.Label>Min Price: €{priceRange[0]}</Form.Label>
+                      <RangeSlider
+                        value={priceRange[0]}
+                        onChange={(e) => handlePriceChange(parseInt(e.target.value), 'min')}
+                        min={0}
+                        max={1000}
+                      />
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Max Price: €{priceRange[1]}</Form.Label>
+                      <RangeSlider
+                        value={priceRange[1]}
+                        onChange={(e) => handlePriceChange(parseInt(e.target.value), 'max')}
+                        min={0}
+                        max={1000}
+                      />
+                    </Form.Group>
+                  </div>
+                </div>
+
+                {/* Condition Filter */}
+                <div className="filter-group">
+                  <h4>Condition</h4>
+                  <Form.Group>
+                    <Form.Check
+                      type="radio"
+                      label="All"
+                      name="condition"
+                      checked={condition === 'all'}
+                      onChange={() => setCondition('all')}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="New"
+                      name="condition"
+                      checked={condition === 'new'}
+                      onChange={() => setCondition('new')}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Used"
+                      name="condition"
+                      checked={condition === 'used'}
+                      onChange={() => setCondition('used')}
+                    />
+                  </Form.Group>
+                </div>
+
+                {/* Color Filter */}
+                <div className="filter-group">
+                  <h4>Color</h4>
+                  <Form.Group>
+                    <Form.Check
+                      type="radio"
+                      label="All"
+                      name="color"
+                      checked={color === 'all'}
+                      onChange={() => setColor('all')}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Dark"
+                      name="color"
+                      checked={color === 'dark'}
+                      onChange={() => setColor('dark')}
+                    />
+                    <Form.Check
+                      type="radio"
+                      label="Bright"
+                      name="color"
+                      checked={color === 'bright'}
+                      onChange={() => setColor('bright')}
+                    />
+                  </Form.Group>
+                </div>
+              </div>
             </div>
 
             <div className="filter-actions">
               <button 
-                className="btn btn-outline-primary" 
-                onClick={() => setShowFilter(false)}
+                className="btn btn-outline-secondary me-2" 
+                onClick={resetFilters}
+              >
+                Reset
+              </button>
+              <button 
+                className="btn btn-primary" 
+                onClick={applyFilters}
               >
                 Apply Filters
               </button>
