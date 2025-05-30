@@ -24,7 +24,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules/
-dist/
 .cache/
 
 # Python/Flask
@@ -45,7 +44,6 @@ einkaufzentrum/backend/node_modules/
 node_modules/
 
 # Build outputs
-dist/
 build/
 
 # Logs
