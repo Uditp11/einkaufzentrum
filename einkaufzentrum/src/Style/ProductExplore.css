@@ -1,0 +1,61 @@
+:root {
+  --main-black: #0b0c10;
+  --theme-blue: #175db8;
+  --text-light: #dcdcdc;
+}
+
+.explore {
+  background-color: var(--main-black);
+  color: var(--text-light);
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
+.section-title {
+  margin: 0;
+  padding: 0 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  max-width: 100%;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 2rem 1rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+},
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #ff4444;
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+    gap: 1rem;
+  }
+  
+  .explore {
+    padding: 1rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    padding: 0 1rem;
+  }
+}
