@@ -24,5 +24,42 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 node_modules/
-dist/
 .cache/
+
+# Python/Flask
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+venv/
+einkaufzentrum/backend/venv/
+*.egg-info/
+pip-log.txt
+pip-delete-this-directory.txt
+.env
+einkaufzentrum/backend/node_modules/
+
+# Node modules folder
+node_modules/
+
+# Build outputs
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Env files
+.env
+
+# Editor folders/files
+.vscode/
+.idea/
+
+# Ignore native Node.js add-ons and binaries
+*.node
+
+# Ignore Microsoft Access database files (or any .mdb files)
+*.mdb

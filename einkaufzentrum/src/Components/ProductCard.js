@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 import '../Style/ProductCard.css';
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
+    const { title, price, description, image, condition } = product;
+
     return (
         <div className="product-card">
             <div className="product-image">
-                <img src="https://source.unsplash.com/random/400x300?product" alt="Product Image"/>
+                <img src={image} alt={title} />
+                <span className="condition-badge">{condition}</span>
             </div>
-            <div className="product-content">
-                <h3 className="product-title">Wireless Noise-Canceling Headphones</h3>
-                <p className="product-description">Premium sound quality with 40hr battery life. Touch controls & premium comfort.</p>
-                <p>Price : 200$</p>
-                <div className="product-actions">
-                    <button className="btn buy-btn">Buy Now</button>
-                    <button className="btn view-btn">View Details</button>
-                </div>
+            <div className="product-info">
+                <h3 className="product-title">{title}</h3>
+                <p className="product-description">{description}</p>
+                <div className="product-price">${price.toFixed(2)}</div>
+                <button className="view-details-btn">View Details</button>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ProductCard
+export default ProductCard; 

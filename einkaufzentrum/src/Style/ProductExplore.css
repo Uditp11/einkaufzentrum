@@ -32,6 +32,15 @@
   max-width: 100%;
   box-sizing: border-box;
   margin-bottom: 2rem;
+},
+.loading, .error {
+    text-align: center;
+    padding: 2rem;
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #ff4444;
 }
 
 @media (max-width: 768px) {

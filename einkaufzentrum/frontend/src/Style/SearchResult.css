@@ -1,0 +1,309 @@
+.page-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-black);
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.search-results-container {
+    flex: 1;
+    background-color: var(--main-black);
+    color: var(--text-light);
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.search-header {
+    margin-bottom: 2rem;
+}
+
+.results-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.results-count {
+    color: var(--text-light);
+    opacity: 0.8;
+    margin-bottom: 1.5rem;
+}
+
+.search-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+}
+
+.sort-control button,
+.filter-control button {
+    background-color: transparent;
+    border: 1px solid var(--theme-blue);
+    color: var(--theme-blue);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.sort-control button:hover,
+.filter-control button:hover {
+    background-color: var(--theme-blue);
+    color: var(--text-light);
+}
+
+.sort-control i,
+.filter-control i {
+    font-size: 1.1rem;
+}
+
+.products-grid {
+    padding: 1rem 2rem;
+}
+
+.products-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
+
+.filter-section {
+    background-color: var(--main-black);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    margin: 0 2rem 20px 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-sizing: border-box;
+    max-width: calc(100% - 4rem);
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.filter-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.close-filter {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.close-filter:hover {
+    opacity: 1;
+    color: var(--theme-blue);
+}
+
+.filter-options {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-group {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.filter-group:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.filter-group h4 {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: var(--theme-blue);
+}
+
+.price-inputs {
+    padding: 10px 0;
+}
+
+.price-inputs .form-label {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.filter-actions {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Range slider custom styling */
+.form-range {
+    height: 1.5rem;
+    padding: 0;
+    background: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+}
+
+.form-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--theme-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    transition: transform 0.2s ease;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.form-range::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 2px rgba(23, 162, 184, 0.4);
+}
+
+/* Radio buttons styling */
+.form-check {
+    margin-bottom: 12px;
+}
+
+.form-check-input {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.form-check-input:checked {
+    background-color: var(--theme-blue);
+    border-color: var(--theme-blue);
+}
+
+.form-check-label {
+    color: var(--text-light);
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.form-check-label:hover {
+    opacity: 1;
+}
+
+/* Filter action buttons */
+.filter-actions .btn-outline-secondary {
+    color: var(--text-light);
+    border-color: rgba(255, 255, 255, 0.2);
+    background: transparent;
+}
+
+.filter-actions .btn-outline-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.filter-actions .btn-primary {
+    background: var(--theme-blue);
+    border-color: var(--theme-blue);
+}
+
+.filter-actions .btn-primary:hover {
+    background: #1590a3;
+    border-color: #1590a3;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .filter-section {
+        margin: 0 1.5rem 20px 1.5rem;
+        max-width: calc(100% - 3rem);
+    }
+
+    .filter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-section {
+        margin: 0 1rem 20px 1rem;
+        max-width: calc(100% - 2rem);
+        padding: 15px;
+    }
+
+    .filter-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .filter-options {
+        padding: 0 5px;
+    }
+
+    .filter-group {
+        padding: 12px;
+    }
+}
+
+.loading, .error {
+    color: var(--text-light);
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+}
+
+.loading {
+    font-size: 1.2rem;
+}
+
+.error {
+    color: #ff4444;
+}
+
+.results-count.error {
+    color: #ff4444;
+}
