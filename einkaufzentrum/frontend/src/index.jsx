@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import './Style/global.css';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProductExplore from './Components/ProductExplore';
 import LoginPage from './Components/Login';
@@ -45,5 +44,3 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router}/>
   </React.StrictMode>
 );
-
-reportWebVitals();
