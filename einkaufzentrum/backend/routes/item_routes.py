@@ -15,28 +15,23 @@ SYNONYMS = {
 
 @item_bp.route("/", methods=["GET"])
 def list_all_ads():
-    items = Item.query.filter_by(status="Approved").order_by(Item.date_posted.desc()).all()
-    return jsonify([item.to_dict() for item in items])
-
-@item_bp.route("/search", methods=["GET"])
-def search_items():
-    raw_q = request.args.get("q", "").strip()
-    if not raw_q:
-        return jsonify([])
-
-    q_lower = raw_q.lower()
-    ilike_pattern = f"%{raw_q}%"
-
+    search = request.args.get("search", "").strip()
     query = Item.query.join(Category, Item.category_id == Category.category_id)
-    filters = [
-        Item.title.ilike(ilike_pattern),
-        Category.name.ilike(ilike_pattern)
-    ]
 
-    if q_lower in SYNONYMS:
-        filters += [Category.name == name for name in SYNONYMS[q_lower]]
+    if search:
+        q_lower = search.lower()
+        ilike_pattern = f"%{search}%"
+        filters = [
+            Item.title.ilike(ilike_pattern),
+            Category.name.ilike(ilike_pattern)
+        ]
+        if q_lower in SYNONYMS:
+            filters += [Category.name == name for name in SYNONYMS[q_lower]]
 
-    query = query.filter(or_(*filters), Item.status == "Approved")
+        query = query.filter(or_(*filters), Item.status == "Approved")
+    else:
+        query = query.filter(Item.status == "Approved")
+
     items = query.order_by(Item.date_posted.desc()).all()
     return jsonify([item.to_dict() for item in items])
 
