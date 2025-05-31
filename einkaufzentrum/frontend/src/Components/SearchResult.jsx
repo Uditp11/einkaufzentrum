@@ -55,7 +55,7 @@ const SearchResult = () => {
       setError(null);
 
       try {
-        const res = await fetch(`${backendUrl}/api/products?search=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`${backendUrl}/api/items/search?q=${encodeURIComponent(searchQuery)}`);
         
         if (!res.ok) {
           throw new Error(`Failed to fetch search results: ${res.statusText}`);
