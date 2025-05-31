@@ -7,11 +7,32 @@ import { useSearchParams } from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import RangeSlider from 'react-bootstrap/FormRange';
 
+const dummyProducts = [
+  {
+    id: 'dummy1',
+    title: 'Sample Product',
+    description: 'This is a sample product description. The product is in excellent condition and ready for purchase.',
+    price: 299.99,
+    image_url: 'https://source.unsplash.com/random/400x300?electronics',
+    condition: 'new',
+    category: 'Electronics'
+  },
+  {
+    id: 'dummy2',
+    title: 'Test Item',
+    description: 'A high-quality test item available for immediate purchase. Great value for money!',
+    price: 149.99,
+    image_url: 'https://source.unsplash.com/random/400x300?gadget',
+    condition: 'used',
+    category: 'Gadgets'
+  }
+];
+
 const SearchResult = () => {
   const [searchParams] = useSearchParams();
   const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading]   = useState(true);
-  const [error, setError]       = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [showFilter, setShowFilter] = useState(false);
   
   // Filter states
@@ -20,48 +41,55 @@ const SearchResult = () => {
   const [color, setColor] = useState('all');
 
   const searchQuery = searchParams.get('q') || '';
-  const backendUrl = process.env.BACKEND_URL || 'http://localhost:5000';
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
 
   useEffect(() => {
     const fetchSearchResults = async () => {
+      if (!searchQuery.trim()) {
+        setSearchResults(dummyProducts);
+        setLoading(false);
+        return;
+      }
+
       setLoading(true);
       setError(null);
 
       try {
-        const res = await fetch(
-          `${backendUrl}/api/items/search?q=${encodeURIComponent(searchQuery)}`
-        );
-        if (!res.ok) throw new Error('Failed to fetch search results');
+        const res = await fetch(`${backendUrl}/api/products?search=${encodeURIComponent(searchQuery)}`);
+        
+        if (!res.ok) {
+          throw new Error(`Failed to fetch search results: ${res.statusText}`);
+        }
+        
         const data = await res.json();
+        
+        if (!Array.isArray(data)) {
+          throw new Error('Invalid response format from server');
+        }
 
         const normalized = data.map(item => ({
           ...item,
-          id: item.item_id,
-          image_url: item.media_url || 
+          id: item._id || item.id,
+          title: item.name || item.title,
+          description: item.description || 'No description available',
+          price: item.price || 0,
+          image_url: item.media_url || item.image || 
             `https://source.unsplash.com/random/400x300?product`
         }));
-        setSearchResults(normalized);
+        
+        // Add dummy products if no results found
+        setSearchResults(normalized.length > 0 ? normalized : dummyProducts);
       } catch (err) {
+        console.error('Search error:', err);
         setError(err.message);
-        setSearchResults([
-          { 
-            id: 1, 
-            title: "Dummy", 
-            price: 0, 
-            image_url: "https://source.unsplash.com/random/400x300?product" 
-          }
-        ]);
+        // Show dummy products on error
+        setSearchResults(dummyProducts);
       } finally {
         setLoading(false);
       }
     };
 
-    if (searchQuery.trim() !== '') {
-      fetchSearchResults();
-    } else {
-      setSearchResults([]);
-      setLoading(false);
-    }
+    fetchSearchResults();
   }, [searchQuery, backendUrl]);
 
   const handlePriceChange = (value, bound) => {
@@ -87,14 +115,16 @@ const SearchResult = () => {
     <div className="page-container">
       <div className="search-results-container">
         <div className="search-header">
-          <h2 className="results-title">Your Search Results</h2>
+          <h2 className="results-title">Search Results</h2>
           {loading ? (
             <p className="results-count">Searching...</p>
           ) : error ? (
-            <p className="results-count error">Error: {error}</p>
+            <p className="results-count error">
+              Error: {error}. Showing sample products instead.
+            </p>
           ) : (
             <p className="results-count">
-              {searchResults.length} results related to "{searchQuery}"
+              {searchResults.length} results {searchResults === dummyProducts ? '(Sample Products)' : `found for "${searchQuery}"`}
             </p>
           )}
 
