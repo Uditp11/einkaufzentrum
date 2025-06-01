@@ -1,0 +1,195 @@
+.post-ad-container {
+    background-color: var(--main-black);
+    min-height: calc(100vh - 60px); /* Adjust based on header height */
+    padding: 2rem 0;
+    color: var(--text-light);
+}
+
+.post-ad-card {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid var(--theme-blue) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.post-ad-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(33, 150, 243, 0.1);
+}
+
+.card-header {
+    background-color: rgba(23, 93, 184, 0.1) !important;
+    border-bottom: 1px solid var(--theme-blue) !important;
+    padding: 1.5rem !important;
+}
+
+.card-header h3 {
+    color: var(--theme-blue);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.card-body {
+    padding: 2rem !important;
+    background-color: transparent;
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(23, 93, 184, 0.3);
+    color: var(--text-light);
+    padding: 0.75rem;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: var(--theme-blue);
+    box-shadow: 0 0 0 0.2rem rgba(23, 93, 184, 0.15);
+    color: var(--text-light);
+}
+
+.form-control::placeholder {
+    color: rgba(220, 220, 220, 0.5);
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23175DB8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+}
+
+.form-select option {
+    background-color: var(--main-black);
+    color: var(--text-light);
+}
+
+.btn-primary {
+    background-color: var(--theme-blue);
+    border: none;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #1565C0;
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Custom styling for file input */
+.file-upload-wrapper {
+    position: relative;
+}
+
+input[type="file"].form-control {
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button {
+    background-color: var(--theme-blue);
+    color: var(--text-light);
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 15px;
+    margin-right: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="file"].form-control::-webkit-file-upload-button:hover {
+    background-color: #1565C0;
+}
+
+.form-text {
+    color: rgba(220, 220, 220, 0.7);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* Animation for form elements */
+.mb-3 {
+    opacity: 0;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add animation delay for each form group */
+.mb-3:nth-child(1) { animation-delay: 0.1s; }
+.mb-3:nth-child(2) { animation-delay: 0.2s; }
+.mb-3:nth-child(3) { animation-delay: 0.3s; }
+.mb-3:nth-child(4) { animation-delay: 0.4s; }
+.mb-3:nth-child(5) { animation-delay: 0.5s; }
+
+/* Error state styling */
+.form-control.is-invalid,
+.form-select.is-invalid {
+    border-color: #dc3545;
+    background-image: none;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+/* Success state styling */
+.form-control.is-valid,
+.form-select.is-valid {
+    border-color: #198754;
+    background-image: none;
+}
+
+.form-control.is-valid:focus,
+.form-select.is-valid:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .post-ad-container {
+        padding: 1rem;
+    }
+
+    .card-body {
+        padding: 1.5rem !important;
+    }
+    
+    .btn-primary {
+        padding: 0.75rem 1.5rem;
+    }
+} 

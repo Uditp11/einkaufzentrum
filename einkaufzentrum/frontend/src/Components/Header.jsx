@@ -77,6 +77,14 @@ const Header = () => {
                         <li className="nav-item">
                             <NavLink 
                                 className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
+                                to="/post-ad"
+                            >
+                                Post AD
+                            </NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <NavLink 
+                                className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
                                 to="/signup"
                             >
                                 Register
