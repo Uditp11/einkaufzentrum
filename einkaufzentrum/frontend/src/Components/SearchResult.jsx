@@ -41,7 +41,7 @@ const SearchResult = () => {
   const [color, setColor] = useState('all');
 
   const searchQuery = searchParams.get('q') || '';
-  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
 
   useEffect(() => {
     const fetchSearchResults = async () => {
@@ -55,7 +55,7 @@ const SearchResult = () => {
       setError(null);
 
       try {
-        const res = await fetch(`${backendUrl}/api/items/search?q=${encodeURIComponent(searchQuery)}`);
+        const res = await fetch(`${backendUrl}/api/items?search=${encodeURIComponent(searchQuery)}`);
         
         if (!res.ok) {
           throw new Error(`Failed to fetch search results: ${res.statusText}`);

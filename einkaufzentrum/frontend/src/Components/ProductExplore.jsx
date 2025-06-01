@@ -72,7 +72,7 @@ const ProductExplore = () => {
         const fetchProducts = async () => {
             console.log('Fetching products...');
             try {
-                const response = await fetch(`${backendUrl}/api/products`);
+                const response = await fetch(`${backendUrl}/api/items`);
                 console.log('API Response:', response);
                 
                 if (!response.ok) {

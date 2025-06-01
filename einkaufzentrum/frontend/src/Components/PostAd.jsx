@@ -10,8 +10,7 @@ const PostAd = () => {
         title: '',
         description: '',
         price: '',
-        category_id: '',
-        media_url: [],
+        category_id: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
@@ -25,20 +24,6 @@ const PostAd = () => {
         }));
     };
 
-    const handleImageUpload = async (files) => {
-        try {
-            // For now, we'll simulate image upload and return dummy URLs
-            // TODO: Implement actual image upload service
-            const uploadedUrls = Array.from(files).map((file, index) => 
-                `https://storage.example.com/images/${Date.now()}-${index}-${file.name}`
-            );
-            return uploadedUrls;
-        } catch (error) {
-            console.error('Error uploading images:', error);
-            throw new Error('Failed to upload images');
-        }
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -48,17 +33,13 @@ const PostAd = () => {
             // Get the current user's ID (you'll need to implement user authentication)
             const seller_id = 1; // TODO: Replace with actual user ID from authentication
 
-            // Upload images first
-            const mediaUrls = await handleImageUpload(formData.media_url);
-
             // Prepare the data according to backend requirements
             const postData = {
                 title: formData.title,
                 description: formData.description,
                 price: parseFloat(formData.price),
                 category_id: parseInt(formData.category_id),
-                seller_id: seller_id,
-                media_url: mediaUrls.join(',') // Join multiple URLs with comma
+                seller_id: seller_id
             };
 
             // Send the data to the backend
@@ -77,8 +58,7 @@ const PostAd = () => {
                     title: '',
                     description: '',
                     price: '',
-                    category_id: '',
-                    media_url: []
+                    category_id: ''
                 });
                 
                 // Clear success message after 3 seconds
@@ -92,14 +72,6 @@ const PostAd = () => {
         } finally {
             setIsSubmitting(false);
         }
-    };
-
-    const handleImageChange = (e) => {
-        const files = Array.from(e.target.files);
-        setFormData(prevState => ({
-            ...prevState,
-            media_url: files
-        }));
     };
 
     return (
@@ -187,30 +159,13 @@ const PostAd = () => {
                                         </div>
                                     </div>
 
-                                    <div className="mb-3 file-upload-wrapper">
-                                        <label htmlFor="media_url" className="form-label">Upload Images</label>
-                                        <input
-                                            type="file"
-                                            className="form-control"
-                                            id="media_url"
-                                            name="media_url"
-                                            onChange={handleImageChange}
-                                            multiple
-                                            accept="image/*"
-                                            required
-                                        />
-                                        <small className="form-text">You can upload multiple images</small>
-                                    </div>
-
-                                    <div className="d-grid">
-                                        <button 
-                                            type="submit" 
-                                            className="btn btn-primary"
-                                            disabled={isSubmitting}
-                                        >
-                                            {isSubmitting ? 'Posting...' : 'Post Advertisement'}
-                                        </button>
-                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="btn btn-primary w-100"
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? 'Posting...' : 'Post Advertisement'}
+                                    </button>
                                 </form>
                             </div>
                         </div>
