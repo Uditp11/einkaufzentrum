@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAuth } from '../context/AuthContext';
 import axios from 'axios';
 import '../Style/PostAd.css';
 
@@ -12,6 +13,15 @@ const PostAd = () => {
         price: '',
         category_id: ''
     });
+
+    const [imageFile, setImageFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        setImageFile(e.target.files[0]);
+    };
+
+    const { user } = useAuth(); // user contains userId, token, etc.
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
@@ -28,47 +38,44 @@ const PostAd = () => {
         e.preventDefault();
         setIsSubmitting(true);
         setError(null);
-        
-        try {
-            // Get the current user's ID (you'll need to implement user authentication)
-            const seller_id = 1; // TODO: Replace with actual user ID from authentication
 
-            // Prepare the data according to backend requirements
+        try {
+            let imageUrl = '';
+
+            // Uploading image to S3 and getting the URL to post api and store in the database
+            if (imageFile) {
+            const imageData = new FormData();
+            imageData.append('image', imageFile);
+
+            const uploadRes = await axios.post('/api/upload/image', imageData);
+
+            imageUrl = uploadRes.data.image_url;
+            }
+
+            const seller_id = user?.userId || 0;
+
             const postData = {
-                title: formData.title,
-                description: formData.description,
-                price: parseFloat(formData.price),
-                category_id: parseInt(formData.category_id),
-                seller_id: seller_id
+            ...formData,
+            price: parseFloat(formData.price),
+            category_id: parseInt(formData.category_id),
+            seller_id: seller_id,
+            media_url: imageUrl
             };
 
-            // Send the data to the backend
             const response = await axios.post('/api/items/add', postData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    // Add authorization header when you implement authentication
-                    // 'Authorization': `Bearer ${userToken}`
-                }
+            headers: { 'Content-Type': 'application/json' },
             });
 
             if (response.status === 200) {
-                setSuccess(true);
-                // Reset form
-                setFormData({
-                    title: '',
-                    description: '',
-                    price: '',
-                    category_id: ''
-                });
-                
-                // Clear success message after 3 seconds
-                setTimeout(() => {
-                    setSuccess(false);
-                }, 3000);
+            setSuccess(true);
+            setFormData({ title: '', description: '', price: '', category_id: '' });
+            setImageFile(null);
+
+            setTimeout(() => setSuccess(false), 3000);
             }
-        } catch (error) {
-            console.error('Error posting ad:', error);
-            setError(error.response?.data?.error || 'Failed to post advertisement. Please try again.');
+        } catch (err) {
+            console.error(err);
+            setError('Failed to post advertisement.');
         } finally {
             setIsSubmitting(false);
         }
@@ -157,6 +164,18 @@ const PostAd = () => {
                                                 <option value="5">Other</option>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <div className="mb-3">
+                                        <label htmlFor="image" className="form-label">Upload Image</label>
+                                        <input
+                                            type="file"
+                                            className="form-control"
+                                            id="image"
+                                            name="image"
+                                            accept="image/*"
+                                            onChange={handleFileChange}
+                                        />
                                     </div>
 
                                     <button

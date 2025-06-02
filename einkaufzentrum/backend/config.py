@@ -16,3 +16,8 @@ class Config:
     
     # CORS configuration
     CORS_HEADERS = 'Content-Type'
+
+    AWS_ACCESS_KEY_ID = "AKIAST5TF2TFAC5UNOUX"
+    AWS_SECRET_ACCESS_KEY = "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"
+    S3_BUCKET = "gdsd-project-summer-2025"
+    S3_REGION = "us-east-1"

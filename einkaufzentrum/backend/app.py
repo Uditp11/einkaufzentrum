@@ -6,7 +6,7 @@ from routes import register_routes
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
+CORS(app, supports_credentials=True)
 db.init_app(app)
 
 register_routes(app)
