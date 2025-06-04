@@ -13,7 +13,7 @@ SYNONYMS = {
     "book": ["Books"],
 }
 
-@item_bp.route("/", methods=["GET"])
+@item_bp.route("", methods=["GET"])
 def list_all_ads():
     search = request.args.get("search", "").strip()
     query = Item.query.join(Category, Item.category_id == Category.category_id)
