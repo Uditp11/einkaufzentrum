@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../Style/PostAd.css';
 
 // Configure axios base URL
-axios.defaults.baseURL = 'http://localhost:5000'; // Backend server URL
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL; // Backend server URL
 
 const PostAd = () => {
     const [formData, setFormData] = useState({

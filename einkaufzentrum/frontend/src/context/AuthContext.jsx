@@ -6,6 +6,7 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
+    const API_URL = import.meta.env.VITE_BACKEND_URL;
 
     useEffect(() => {
         // Check if user is logged in from localStorage
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
     const verifyToken = async (token) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/users/verify-token', { token });
+            const response = await axios.post(`${API_URL}/api/users/verify-token`, { token });
             return response.status === 200;
         } catch (error) {
             console.error('Token verification failed:', error);

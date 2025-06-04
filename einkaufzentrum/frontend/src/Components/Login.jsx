@@ -52,7 +52,7 @@ const Login = () => {
 
         try {
             console.log('Sending login request with:', formData);
-            const response = await axios.post('http://localhost:5000/api/users/login', {
+            const response = await axios.post('/api/users/login', {
                 email: formData.email,
                 password: formData.password
             });
