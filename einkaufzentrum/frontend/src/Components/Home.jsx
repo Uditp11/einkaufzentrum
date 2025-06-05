@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../Style/Home.css";
 import Footer from "./Footer";
 import { useNavigate, Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { FaShoppingCart, FaUserFriends, FaLock, FaGithub, FaLinkedin, FaCheck } from 'react-icons/fa';
 import { MdSecurity } from 'react-icons/md';
+import Shimmer from './Shimmer';
 
 const developers = [
     {
@@ -72,14 +73,61 @@ const features = [
 
 const HomePage = () => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        AOS.init({
-            duration: 1000,
-            once: true,
-            mirror: false
-        });
+        let mounted = true;
+
+        const initializeAOS = () => {
+            AOS.init({
+                duration: 1000,
+                once: true,
+                mirror: false,
+                disable: 'mobile'
+            });
+        };
+
+        const preloadImages = async () => {
+            const imagesToPreload = [
+                '/ekz-bag-logo.png',
+                'https://res.cloudinary.com/heaven3609/image/upload/v1748611114/Estore_hih2rh.png'
+            ];
+
+            try {
+                await Promise.all(
+                    imagesToPreload.map(src => {
+                        return new Promise((resolve) => {
+                            const img = new Image();
+                            img.src = src;
+                            img.onload = resolve;
+                            img.onerror = resolve;
+                        });
+                    })
+                );
+            } catch (error) {
+                console.error('Error preloading images:', error);
+            }
+
+            if (mounted) {
+                setTimeout(() => {
+                    if (mounted) {
+                        setIsLoading(false);
+                        initializeAOS();
+                    }
+                }, 500);
+            }
+        };
+
+        preloadImages();
+
+        return () => {
+            mounted = false;
+        };
     }, []);
+
+    if (isLoading) {
+        return <Shimmer />;
+    }
 
     const scrollToAbout = () => {
         const aboutSection = document.getElementById('about');

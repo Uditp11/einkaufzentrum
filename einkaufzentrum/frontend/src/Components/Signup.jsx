@@ -13,6 +13,7 @@ const Signup = () => {
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const API_URL = import.meta.env.VITE_BACKEND_URL;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -60,7 +61,7 @@ const Signup = () => {
             // Remove confirm_password before sending to API
             const { confirm_password, ...signupData } = formData;
             
-            const response = await axios.post('http://localhost:5000/api/users/signup', signupData);
+            const response = await axios.post(`${API_URL}/api/users/signup`, signupData);
             
             if (response.status === 201) {
                 // Redirect to login page with success message

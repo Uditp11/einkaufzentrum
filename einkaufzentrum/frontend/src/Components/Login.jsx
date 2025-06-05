@@ -52,7 +52,7 @@ const Login = () => {
 
         try {
             console.log('Sending login request with:', formData);
-            const response = await axios.post('http://localhost:5000/api/users/login', {
+            const response = await axios.post('/api/users/login', {
                 email: formData.email,
                 password: formData.password
             });
@@ -60,7 +60,7 @@ const Login = () => {
             console.log('Login response:', response);
 
             if (response.status === 200 && response.data) {
-                const { user_id, email, token, full_name } = response.data;
+                const { user_id, email, token, full_name, role} = response.data;
                 
                 // Store the token in localStorage
                 localStorage.setItem('token', token);
@@ -73,6 +73,7 @@ const Login = () => {
                     userId: user_id,
                     email,
                     fullName: full_name,
+                    role,                    
                     token
                 });
 

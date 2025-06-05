@@ -6,7 +6,7 @@ from routes import register_routes
 
 app = Flask(__name__)
 app.config.from_object(Config)
-CORS(app)
+CORS(app, supports_credentials=True)
 db.init_app(app)
 
 register_routes(app)
@@ -18,4 +18,4 @@ def health():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=5000, debug=False, use_reloader=False)
