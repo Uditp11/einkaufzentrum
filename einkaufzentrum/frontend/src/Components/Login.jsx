@@ -60,7 +60,7 @@ const Login = () => {
             console.log('Login response:', response);
 
             if (response.status === 200 && response.data) {
-                const { user_id, email, token, full_name } = response.data;
+                const { user_id, email, token, full_name, role} = response.data;
                 
                 // Store the token in localStorage
                 localStorage.setItem('token', token);
@@ -73,6 +73,7 @@ const Login = () => {
                     userId: user_id,
                     email,
                     fullName: full_name,
+                    role,                    
                     token
                 });
 

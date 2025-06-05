@@ -55,6 +55,7 @@ def login():
             {
                 'user_id': user.user_id,
                 'email': user.email,
+                'role': user.role,
                 'exp': datetime.utcnow() + timedelta(days=1)  # Token expires in 1 day
             },
             Config.SECRET_KEY,
@@ -66,7 +67,8 @@ def login():
             "user_id": user.user_id,
             "email": user.email,
             "token": token,
-            "full_name": user.full_name
+            "full_name": user.full_name,
+            "role": user.role,
         }), 200
 
     except Exception as e:
@@ -90,7 +92,8 @@ def verify_token():
             return jsonify({
                 "valid": True,
                 "user_id": user.user_id,
-                "email": user.email
+                "email": user.email,
+                "role": user.role
             }), 200
 
         except jwt.ExpiredSignatureError:

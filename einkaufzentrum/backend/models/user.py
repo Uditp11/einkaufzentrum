@@ -10,6 +10,7 @@ class User(db.Model):
     password_hash = db.Column(db.String(128), nullable=False)
     status = db.Column(db.Enum('Active', 'Banned'), default='Active')
     joined_date = db.Column(db.DateTime)
+    role = db.Column(db.Enum('User', 'Admin'), default='User')
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
