@@ -98,6 +98,9 @@ const Header = () => {
                                     <ul className="dropdown-menu">
                                         <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                                         <li><Link className="dropdown-item" to="/settings">Settings</Link></li>
+                                        {user.role === "Admin" && (
+                                        <li><Link className="dropdown-item" to="/dashboard">Dashboard</Link></li>
+                                        )}
                                         <li><hr className="dropdown-divider" /></li>
                                         <li>
                                             <button 
