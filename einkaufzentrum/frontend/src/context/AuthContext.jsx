@@ -6,7 +6,8 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const API_URL = import.meta.env.VITE_BACKEND_URL;
+    const API_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
+    axios.defaults.baseURL = API_URL;
 
     useEffect(() => {
         // Check if user is logged in from localStorage

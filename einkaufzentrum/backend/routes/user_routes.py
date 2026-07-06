@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from models.user import User
+from models import User, Report
 from extensions import db
 from datetime import datetime, timedelta
 import jwt
@@ -136,3 +136,28 @@ def token_required(f):
         return f(current_user, *args, **kwargs)
 
     return decorated
+
+@user_bp.route("/report/<int:user_id>", methods=["POST"])
+@token_required
+def report_user(current_user, user_id):
+    try:
+        target_user = User.query.get_or_404(user_id)
+        data = request.get_json() or {}
+        reason = data.get("reason", "").strip()
+        
+        if not reason:
+            return jsonify({"error": "Reason is required"}), 400
+            
+        report = Report(
+            reporter_id=current_user.user_id,
+            target_user_id=user_id,
+            reason=reason,
+            status="Pending",
+            timestamp=datetime.utcnow()
+        )
+        db.session.add(report)
+        db.session.commit()
+        return jsonify({"message": f"User {target_user.full_name} reported successfully."}), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500

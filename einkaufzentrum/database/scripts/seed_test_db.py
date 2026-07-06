@@ -47,7 +47,7 @@ for _ in range(5):
     """, (full_name, email, password_hash, status))
     user_id = cursor.lastrowid
     user_ids.append(user_id)
-	print(f"Inserted user_id={user_id}, email={email}, password={plaintext_password}")
+    print(f"Inserted user_id={user_id}, email={email}, password={plaintext_password}")
 
 
 # --- Insert Categories ---
@@ -77,7 +77,7 @@ description_templates = [
     "Selling due to upgrade – works perfectly!",
     "Ideal for daily use, minor signs of wear.",
     "Barely used, like new!",
-    "Great deal – don’t miss out!",
+    "Great deal – don't miss out!",
     "Functioning perfectly, selling at a bargain.",
     "Gently used and well-maintained.",
     "Comes with original packaging.",

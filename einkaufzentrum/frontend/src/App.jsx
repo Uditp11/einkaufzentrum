@@ -13,6 +13,7 @@ import PostsPendingApproval from './Components/Admin/PostsPendingApproval';
 import PostApprovalDetail from './Components/Admin/PostApprovalDetail';
 import ReportedUsers from './Components/Admin/ReportedUsers';
 import UserDetail from './Components/Admin/UserDetail';
+import ReportedPosts from './Components/Admin/ReportedPosts';
 import './Style/App.css';
 
 // Protected Route component
@@ -65,6 +66,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <PostApprovalDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard/posts-marked-scam"
+              element={
+                <ProtectedRoute>
+                  <ReportedPosts />
                 </ProtectedRoute>
               }
             />

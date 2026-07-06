@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -11,10 +12,9 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('/api/admin/dashboard-counts')
-      .then(res => res.json())
-      .then(data => {
-        setCounts(data);
+    axios.get('/api/admin/dashboard-counts')
+      .then(res => {
+        setCounts(res.data);
         setLoading(false);
       })
       .catch(() => setLoading(false));

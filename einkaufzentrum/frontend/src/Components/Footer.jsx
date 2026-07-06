@@ -32,7 +32,7 @@ const Footer = () => {
                 </div>
 
                 <div className="text-center copyright mt-4">
-                    © Hochschule Fulda | For education purpose only.
+                    © {new Date().getFullYear()} Udit Parihar. All rights reserved.
                 </div>
             </div>
         </section>

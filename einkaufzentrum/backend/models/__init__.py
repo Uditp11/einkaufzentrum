@@ -1,7 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from extensions import db
 
 from .item import Item
 from .category import Category
-from .user import User  # Add if you have user.py
+from .user import User
+from .report import Report
+from .message import Message

@@ -1,0 +1,32 @@
+# Python virtual environments & bytecode
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local Database files
+*.db
+*.sqlite
+
+# Node modules & production build outputs
+node_modules/
+dist/
+build/
+.parcel-cache/
+
+# System and editor configurations
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs & temp files
+*.log
+*.tmp
+~$*.docx
+~WRL*.tmp
+*.png
+!machine_learning/training_history.png
+!machine_learning/sample_predictions.png

@@ -85,7 +85,8 @@ const ProductExplore = () => {
                 if (Array.isArray(data) && data.length > 0) {
                     console.log('Valid data received, normalizing...');
                     const normalized = data.map(item => ({
-                        id: item._id || item.id,
+                        id: item.item_id || item._id || item.id,
+                        item_id: item.item_id || item._id || item.id,
                         title: item.name || item.title,
                         description: item.description || 'No description available',
                         price: item.price || 0,

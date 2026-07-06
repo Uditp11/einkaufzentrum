@@ -4,54 +4,9 @@ import Footer from "./Footer";
 import { useNavigate, Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { FaShoppingCart, FaUserFriends, FaLock, FaGithub, FaLinkedin, FaCheck } from 'react-icons/fa';
+import { FaShoppingCart, FaUserFriends, FaCheck, FaUpload, FaRobot, FaClipboardCheck } from 'react-icons/fa';
 import { MdSecurity } from 'react-icons/md';
 import Shimmer from './Shimmer';
-
-const developers = [
-    {
-        name: "Pavithra Purushothaman",
-        role: "Project Lead",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1748612803/pavithra_profile_mubngz.jpg',
-        linkedin: "#",
-        github: "#"
-    },
-    {
-        name: "Ayush Kaushik",
-        role: "Frontend Lead",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1746008303/Mee_f4pdiu.jpg',
-        linkedin: "#",
-        github: "#"
-    },
-    {
-        name: "Ridhima Tigadi",
-        role: "Backend Lead",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1748612803/ridhima-profile_sjqfzr.jpg',
-        linkedin: "#",
-        github: "#"
-    },
-    {
-        name: "Mufidha Sukurela",
-        role: "Github master",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1748613095/female_user_heisft.png',
-        linkedin: "#",
-        github: "#"
-    },
-    {
-        name: "Udit Parihar",
-        role: "Backend developer",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1748612997/udit_profile_bmlrpx.jpg',
-        linkedin: "#",
-        github: "#"
-    },
-    {
-        name: "Akhil Baiju",
-        role: "Database manager",
-        img: 'https://res.cloudinary.com/heaven3609/image/upload/v1748611921/Male_user_bd7rdc.png',
-        linkedin: "#",
-        github: "#"
-    }
-];
 
 const features = [
     {
@@ -248,36 +203,47 @@ const HomePage = () => {
                 </div>
             </section>
 
-            {/* Team Section */}
-            <section className="features-section">
+            {/* How It Works Section */}
+            <section className="how-it-works-section">
                 <div className="container">
-                    <h2 className="text-center mb-5">
-                        <span className="text-gradient">Meet Our Team</span>
+                    <h2 className="text-center mb-3">
+                        <span className="text-gradient">How It Works</span>
                     </h2>
+                    <p className="text-center text-muted-light mb-5">
+                        Powered by AI to keep the marketplace safe and trustworthy.
+                    </p>
                     <div className="row">
-                        {developers.map((dev, idx) => (
-                            <div className="col-md-4 mb-4" key={idx}>
-                                <div className="dev-card">
-                                    <div className="dev-pic">
-                                        <img 
-                                            src={dev.img}
-                                            alt={dev.name}
-                                            className="dev-image"
-                                        />
-                                    </div>
-                                    <h3 className="dev-name">{dev.name}</h3>
-                                    <p className="dev-role">{dev.role}</p>
-                                    <div className="dev-social">
-                                        <a href={dev.github} className="social-link" target="_blank" rel="noopener noreferrer">
-                                            <FaGithub />
-                                        </a>
-                                        <a href={dev.linkedin} className="social-link" target="_blank" rel="noopener noreferrer">
-                                            <FaLinkedin />
-                                        </a>
-                                    </div>
+                        <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="0">
+                            <div className="step-card">
+                                <div className="step-number">1</div>
+                                <div className="step-icon">
+                                    <FaUpload />
                                 </div>
+                                <h3>Post Your Listing</h3>
+                                <p>Upload your item with photos, set a price, and describe what you're selling. It only takes a minute.</p>
                             </div>
-                        ))}
+                        </div>
+                        <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="150">
+                            <div className="step-card step-card-highlight">
+                                <div className="step-number">2</div>
+                                <div className="step-icon">
+                                    <FaRobot />
+                                </div>
+                                <h3>AI Spam Detection</h3>
+                                <p>Our CNN model trained on Fashion MNIST automatically scans every image to flag spam and inappropriate content.</p>
+                                <span className="step-badge">Machine Learning</span>
+                            </div>
+                        </div>
+                        <div className="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                            <div className="step-card">
+                                <div className="step-number">3</div>
+                                <div className="step-icon">
+                                    <FaClipboardCheck />
+                                </div>
+                                <h3>Admin Review & Go Live</h3>
+                                <p>Admins review flagged content on the dashboard. Once approved, your listing goes live for the community.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>

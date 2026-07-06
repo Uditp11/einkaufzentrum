@@ -69,7 +69,8 @@ const SearchResult = () => {
 
         const normalized = data.map(item => ({
           ...item,
-          id: item._id || item.id,
+          id: item.item_id || item._id || item.id,
+          item_id: item.item_id || item._id || item.id,
           title: item.name || item.title,
           description: item.description || 'No description available',
           price: item.price || 0,
