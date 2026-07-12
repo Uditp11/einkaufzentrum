@@ -2,7 +2,7 @@
 
 **Einkaufzentrum** is a modern, responsive full-stack peer-to-peer marketplace designed specifically for university students to buy, sell, and exchange essentials. It features an integrated **Machine Learning image classifier** that automatically moderates uploads to prevent spam, paired with a robust **Admin Dashboard** for community control.
 
-This project was built and is maintained as a **personal portfolio project** by **Udit Parihar**.
+This repository is developed and maintained by Udit Parihar.
 
 ---
 
