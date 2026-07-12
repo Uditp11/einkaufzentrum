@@ -34,7 +34,7 @@ This project was built and is maintained as a **personal portfolio project** by 
 |-----------|------------|-------------|
 | **Frontend** | React, React Router, Axios, Bootstrap, AOS | Single-page application, interactive modals, responsive grid |
 | **Backend** | Python Flask, Flask-CORS, PyJWT, SQLAlchemy | RESTful APIs, token authorization guards |
-| **Database** | SQLite / MySQL | Local database fallback (`team4appdb.db`) with dynamic deploy support |
+| **Database** | SQLite / MySQL | Local database fallback (`einkaufzentrum.db`) with dynamic deploy support |
 | **Machine Learning**| TensorFlow 2.x, Keras, NumPy, PIL | Image preprocessing, CNN inference via subprocess |
 
 ---
@@ -91,7 +91,7 @@ Reset your local database and load mock categories, active student accounts, and
 cd ../backend
 venv\Scripts\python seed_db.py
 ```
-*Note: This creates a local SQLite database file `team4appdb.db`.*
+*Note: This creates a local SQLite database file `einkaufzentrum.db`.*
 
 ### 4. Start the Application
 Start the backend server (runs on `http://localhost:5000`):

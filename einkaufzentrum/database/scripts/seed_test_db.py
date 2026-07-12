@@ -5,10 +5,10 @@ import hashlib
 
 # --- Configuration ---
 db_config = {
-    'host': 'team4-db.ck1s0emywc4t.us-east-1.rds.amazonaws.com',
-    'user': 'admin',
-    'password': 'Gdsdteam4_123',
-    'database': 'team4appdb_test'
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'einkaufzentrum_db_password',
+    'database': 'einkaufzentrum_test'
 }
 
 fake = Faker()
@@ -47,7 +47,7 @@ for _ in range(5):
     """, (full_name, email, password_hash, status))
     user_id = cursor.lastrowid
     user_ids.append(user_id)
-    print(f"Inserted user_id={user_id}, email={email}, password={plaintext_password}")
+	print(f"Inserted user_id={user_id}, email={email}, password={plaintext_password}")
 
 
 # --- Insert Categories ---
@@ -77,7 +77,7 @@ description_templates = [
     "Selling due to upgrade – works perfectly!",
     "Ideal for daily use, minor signs of wear.",
     "Barely used, like new!",
-    "Great deal – don't miss out!",
+    "Great deal – don’t miss out!",
     "Functioning perfectly, selling at a bargain.",
     "Gently used and well-maintained.",
     "Comes with original packaging.",

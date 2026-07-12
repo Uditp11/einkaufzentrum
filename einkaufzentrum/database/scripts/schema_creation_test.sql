@@ -1,11 +1,11 @@
 -- Switch to test DB
-USE team4appdb_test;
+USE einkaufzentrum_test;
 
--- Create user 'Todtenhoefer' with password
-CREATE USER IF NOT EXISTS 'Todtenhoefer'@'%' IDENTIFIED BY 'Gdsdteam4_123';
+-- Create user 'einkaufzentrum_user' with password
+CREATE USER IF NOT EXISTS 'einkaufzentrum_user'@'%' IDENTIFIED BY 'MarketplacePass_123';
 
 -- Grant all privileges on test database.
-GRANT ALL PRIVILEGES ON team4appdb_test.* TO 'Todtenhoefer'@'%';
+GRANT ALL PRIVILEGES ON einkaufzentrum_test.* TO 'einkaufzentrum_user'@'%';
 
 -- Apply the changes
 FLUSH PRIVILEGES;

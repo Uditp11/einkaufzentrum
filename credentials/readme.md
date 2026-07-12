@@ -24,8 +24,8 @@ Follow these steps to securely connect to your Ubuntu-based AWS EC2 instance via
 - You will now have shell access to the Ubuntu EC2 instance! 🎉
 
 ## DB Details
-1. DB instance identifier- team4-db
+1. DB instance identifier- einkaufzentrum-db
 2. Master username- admin
-3. Master Password- Gdsdteam4_123
-4. DB name- team4appdb
-5. RDS endpoint- team4-db.ck1s0emywc4t.us-east-1.rds.amazonaws.com
+3. Master Password- MarketplacePass_123
+4. DB name- einkaufzentrum_db
+5. RDS endpoint- einkaufzentrum-db.ck1s0emywc4t.us-east-1.rds.amazonaws.com
