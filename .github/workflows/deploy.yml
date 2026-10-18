@@ -1,9 +1,10 @@
 name: Deploy to S3
 
+# The S3 bucket and AWS credentials behind this workflow were decommissioned,
+# so it no longer runs on push. It is kept for reference and can only be
+# started by hand from the Actions tab.
 on:
-  push:
-    branches:
-      - main  # Change this if your branch is not 'main'
+  workflow_dispatch:
 
 jobs:
   deploy:
