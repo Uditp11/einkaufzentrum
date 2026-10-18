@@ -15,6 +15,10 @@ node_modules/
 dist/
 build/
 .parcel-cache/
+*.zip
+
+# Local env files (copy frontend/.env.example to frontend/.env)
+.env
 
 # System and editor configurations
 .vscode/
