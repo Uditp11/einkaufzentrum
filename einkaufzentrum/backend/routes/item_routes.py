@@ -55,7 +55,9 @@ def post_item():
     try:
         backend_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         project_dir = os.path.abspath(os.path.join(backend_dir, ".."))
-        ml_python = os.path.join(project_dir, "machine_learning", "venv", "Scripts", "python.exe")
+        venv_dir = os.path.join(project_dir, "machine_learning", "venv")
+        # Windows venvs keep python in Scripts, Linux and macOS in bin
+        ml_python = os.path.join(venv_dir, "Scripts", "python.exe") if os.name == "nt" else os.path.join(venv_dir, "bin", "python")
         classify_script = os.path.join(project_dir, "machine_learning", "classify_image.py")
         
         if os.path.exists(ml_python) and os.path.exists(classify_script):

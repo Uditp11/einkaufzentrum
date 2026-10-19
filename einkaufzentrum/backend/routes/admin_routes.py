@@ -5,6 +5,7 @@ from config import Config
 import jwt
 from datetime import datetime
 from functools import wraps
+from werkzeug.exceptions import HTTPException
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/api/admin")
 
@@ -92,6 +93,8 @@ def get_pending_item_detail(current_user, item_id):
         seller = User.query.get(item.seller_id)
         item_dict["seller_name"] = seller.full_name if seller else "Unknown"
         return jsonify(item_dict), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -104,6 +107,8 @@ def approve_item(current_user, item_id):
         item.status = 'Approved'
         db.session.commit()
         return jsonify({"message": f"Listing '{item.title}' approved successfully"}), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -126,6 +131,8 @@ def reject_item(current_user, item_id):
         
         db.session.commit()
         return jsonify({"message": f"Listing '{item.title}' rejected and deleted. Reason: {reason}"}), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -209,6 +216,8 @@ def get_reported_user_detail(current_user, user_id):
             "avatar": f"https://api.dicebear.com/7.x/adventurer/svg?seed={u.email}",
             "reports": [r.to_dict() for r in reports]
         }), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -225,6 +234,8 @@ def ban_user(current_user, user_id):
         
         db.session.commit()
         return jsonify({"message": f"User {u.full_name} has been banned and their listings hidden."}), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
@@ -251,6 +262,8 @@ def delete_user(current_user, user_id):
         db.session.delete(u)
         db.session.commit()
         return jsonify({"message": f"User {u.full_name} deleted permanently."}), 200
+    except HTTPException:
+        raise  # let get_or_404 return 404, not 500
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": str(e)}), 500
