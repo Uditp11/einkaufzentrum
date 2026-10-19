@@ -6,9 +6,11 @@ on:
 
 jobs:
   integration:
-    runs-on: ubuntu-latest
+    # Windows, because the saved model only loads there (Keras 2.15 wrote its weight paths with backslashes)
+    runs-on: windows-latest
     defaults:
       run:
+        shell: bash
         working-directory: einkaufzentrum
     steps:
       - uses: actions/checkout@v4
@@ -33,8 +35,8 @@ jobs:
       - name: Install machine learning venv and sample images
         run: |
           python -m venv machine_learning/venv
-          machine_learning/venv/bin/pip install -r machine_learning/requirements.txt
-          machine_learning/venv/bin/python machine_learning/export_sample_images.py
+          machine_learning/venv/Scripts/python -m pip install -r machine_learning/requirements.txt
+          machine_learning/venv/Scripts/python machine_learning/export_sample_images.py
 
       - name: ML pipeline suite (classifier and backend moderation)
         run: python machine_learning/test_ml_pipeline.py

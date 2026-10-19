@@ -17,7 +17,7 @@ This repository is developed and maintained by Udit Parihar.
 ### 2. Demo Image Moderation
 - **CNN Classifier**: A small convolutional network built with TensorFlow/Keras and trained on the Fashion-MNIST dataset.
 - **Spam Rule**: Fashion-MNIST classes `0-7` count as appropriate. Classes `8-9` (bags, ankle boots) count as spam. This is a stand-in for real moderation, not a spam detector.
-- **How it runs**: When a listing is created, the backend converts its image to 28x28 grayscale and runs the model in a subprocess. This only happens when the machine learning virtual environment exists at `machine_learning/venv` (`venv\Scripts\python.exe` on Windows, `venv/bin/python` on Linux and macOS). Otherwise the check is skipped.
+- **How it runs**: When a listing is created, the backend converts its image to 28x28 grayscale and runs the model in a subprocess. This only happens when the machine learning virtual environment exists at `machine_learning/venv` (`venv\Scripts\python.exe` on Windows, `venv/bin/python` on Linux and macOS). Otherwise the check is skipped. The saved model currently loads only on Windows, because Keras 2.15 wrote its weight paths with backslashes.
 - **Flags**: A flagged listing gets a report with the reason `[AI Moderate Flag]` and its score, so it appears in the admin's reported posts queue.
 
 ### 3. Administrator Dashboard
@@ -129,7 +129,7 @@ The machine learning suite needs the `machine_learning` venv and ten sample imag
 machine_learning\venv\Scripts\python machine_learning/export_sample_images.py
 python machine_learning/test_ml_pipeline.py   # classifier on each label, then a spam image posted through the API
 ```
-GitHub Actions runs all three on every push (`.github/workflows/tests.yml`).
+GitHub Actions runs all three on a Windows runner on every push (`.github/workflows/tests.yml`).
 
 ---
 
