@@ -1,7 +1,10 @@
-import boto3, uuid
-from flask import Blueprint, request, jsonify, current_app
+import boto3, os, uuid
+from flask import Blueprint, request, jsonify, current_app, send_from_directory, url_for
+from werkzeug.utils import secure_filename
 
 upload_bp = Blueprint("upload", __name__, url_prefix="/api/upload")
+
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "webp"}
 
 @upload_bp.route("/image", methods=["POST"])
 def upload_image():
@@ -9,6 +12,17 @@ def upload_image():
         return jsonify({"error": "No image file found"}), 400
 
     image = request.files['image']
+
+    # Without AWS keys, store the image on local disk and serve it from Flask
+    if not current_app.config['USE_S3']:
+        name = secure_filename(image.filename or "")
+        if name.rsplit(".", 1)[-1].lower() not in ALLOWED_EXTENSIONS:
+            return jsonify({"error": "Only image files are allowed"}), 400
+        filename = f"{uuid.uuid4().hex}_{name}"
+        os.makedirs(current_app.config['UPLOAD_FOLDER'], exist_ok=True)
+        image.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
+        return jsonify({"image_url": url_for("upload.get_image", filename=filename, _external=True)})
+
     filename = f"{uuid.uuid4().hex}_{image.filename}"
 
     s3 = boto3.client(
@@ -29,3 +43,7 @@ def upload_image():
         return jsonify({"image_url": url})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@upload_bp.route("/files/<path:filename>", methods=["GET"])
+def get_image(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename)

@@ -10,11 +10,18 @@ __pycache__/
 *.db
 *.sqlite
 
+# Images saved by the local upload fallback
+einkaufzentrum/backend/uploads/
+
 # Node modules & production build outputs
 node_modules/
 dist/
 build/
 .parcel-cache/
+*.zip
+
+# Local env files (copy frontend/.env.example to frontend/.env)
+.env
 
 # System and editor configurations
 .vscode/
