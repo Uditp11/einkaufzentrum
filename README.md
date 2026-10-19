@@ -67,7 +67,7 @@ einkaufzentrum/
 ## Getting Started
 
 ### 1. Prerequisites
-- Python 3.10+
+- Python 3.10 or 3.11 (the saved model was written by Keras 2.15, so the machine learning venv uses TensorFlow 2.15 or older, which has no builds for newer Python)
 - Node.js (v18+)
 
 The commands below use Windows paths (`venv\Scripts\...`).
