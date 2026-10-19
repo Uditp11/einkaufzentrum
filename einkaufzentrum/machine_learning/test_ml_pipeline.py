@@ -77,7 +77,7 @@ for label, img_path in appropriate_files:
                 f"score={score:.4f}, is_spam={is_spam}"
             )
         else:
-            log(f"Label {label} image -> Appropriate", False, f"returncode={result.returncode}, stderr={result.stderr[:200]}")
+            log(f"Label {label} image -> Appropriate", False, f"returncode={result.returncode}, stdout={result.stdout[-300:]}, stderr={result.stderr[-200:]}")
     except Exception as e:
         log(f"Label {label} image -> Appropriate", False, str(e))
 
@@ -113,7 +113,7 @@ for label, img_path in spam_files:
                 f"score={score:.4f}, is_spam={is_spam}"
             )
         else:
-            log(f"Label {label} image -> Spam", False, f"returncode={result.returncode}, stderr={result.stderr[:200]}")
+            log(f"Label {label} image -> Spam", False, f"returncode={result.returncode}, stdout={result.stdout[-300:]}, stderr={result.stderr[-200:]}")
     except Exception as e:
         log(f"Label {label} image -> Spam", False, str(e))
 
