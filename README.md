@@ -17,7 +17,7 @@ This repository is developed and maintained by Udit Parihar.
 ### 2. Demo Image Moderation
 - **CNN Classifier**: A small convolutional network built with TensorFlow/Keras and trained on the Fashion-MNIST dataset.
 - **Spam Rule**: Fashion-MNIST classes `0-7` count as appropriate. Classes `8-9` (bags, ankle boots) count as spam. This is a stand-in for real moderation, not a spam detector.
-- **How it runs**: When a listing is created, the backend converts its image to 28x28 grayscale and runs the model in a subprocess. This only happens when the machine learning virtual environment exists at `machine_learning/venv` (the path is the Windows layout, `venv\Scripts\python.exe`). Otherwise the check is skipped.
+- **How it runs**: When a listing is created, the backend converts its image to 28x28 grayscale and runs the model in a subprocess. This only happens when the machine learning virtual environment exists at `machine_learning/venv` (`venv\Scripts\python.exe` on Windows, `venv/bin/python` on Linux and macOS). Otherwise the check is skipped.
 - **Flags**: A flagged listing gets a report with the reason `[AI Moderate Flag]` and its score, so it appears in the admin's reported posts queue.
 
 ### 3. Administrator Dashboard
@@ -115,6 +115,21 @@ npm run dev
 Posting an ad with an image first calls `/api/upload/image`. The project's original AWS setup has been decommissioned, so by default the backend saves the image in `einkaufzentrum/backend/uploads/` and serves it at `/api/upload/files/<name>`. This needs no AWS account and costs nothing, but the images only exist on the machine running the backend. Local uploads accept png, jpg, jpeg, gif and webp files.
 
 To use S3 instead, set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` for your own account, plus `S3_BUCKET` and `S3_REGION` for your bucket.
+
+### 6. Running the Tests
+There are three integration suites. With the backend venv active, from `einkaufzentrum/backend`:
+```bash
+pip install pytest requests
+python -m pytest test_admin_endpoints.py   # admin API, in-memory SQLite
+python seed_db.py
+python test_app_endpoints.py              # starts the API and walks through signup, listing, approval and purchase
+```
+The machine learning suite needs the `machine_learning` venv and ten sample images, which `export_sample_images.py` writes from the Fashion-MNIST test split (Keras downloads it on first use). From `einkaufzentrum`:
+```bash
+machine_learning\venv\Scripts\python machine_learning/export_sample_images.py
+python machine_learning/test_ml_pipeline.py   # classifier on each label, then a spam image posted through the API
+```
+GitHub Actions runs all three on every push (`.github/workflows/tests.yml`).
 
 ---
 

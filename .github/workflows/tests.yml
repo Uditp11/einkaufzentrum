@@ -1,0 +1,40 @@
+name: Tests
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: einkaufzentrum
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install backend
+        run: pip install -r backend/requirements.txt pytest requests
+
+      - name: Admin endpoint suite (pytest, in-memory SQLite)
+        working-directory: einkaufzentrum/backend
+        run: python -m pytest -v test_admin_endpoints.py
+
+      - name: App endpoint suite (seeded SQLite, live server)
+        working-directory: einkaufzentrum/backend
+        run: |
+          python seed_db.py
+          python test_app_endpoints.py
+
+      - name: Install machine learning venv and sample images
+        run: |
+          python -m venv machine_learning/venv
+          machine_learning/venv/bin/pip install -r machine_learning/requirements.txt
+          machine_learning/venv/bin/python machine_learning/export_sample_images.py
+
+      - name: ML pipeline suite (classifier and backend moderation)
+        run: python machine_learning/test_ml_pipeline.py
