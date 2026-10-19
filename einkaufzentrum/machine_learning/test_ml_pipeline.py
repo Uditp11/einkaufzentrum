@@ -17,7 +17,8 @@ import requests
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BACKEND_DIR = os.path.join(SCRIPT_DIR, "..", "backend")
 ML_DIR = os.path.join(SCRIPT_DIR)
-ML_PYTHON = os.path.join(ML_DIR, "venv", "Scripts", "python.exe")
+# Windows venvs keep python in Scripts, Linux and macOS in bin
+ML_PYTHON = os.path.join(ML_DIR, "venv", "Scripts", "python.exe") if os.name == "nt" else os.path.join(ML_DIR, "venv", "bin", "python")
 CLASSIFY_SCRIPT = os.path.join(ML_DIR, "classify_image.py")
 DATASET_DIR = os.path.join(ML_DIR, "fashion_mnist_dataset", "fashion_mnist")
 MODEL_PATH = os.path.join(ML_DIR, "spam_detection_model.keras")
@@ -230,3 +231,4 @@ else:
         if not p:
             print(f"    - {name}: {detail}")
 print("="*60 + "\n")
+sys.exit(1 if failed else 0)
