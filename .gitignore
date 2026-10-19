@@ -10,6 +10,9 @@ __pycache__/
 *.db
 *.sqlite
 
+# Images saved by the local upload fallback
+einkaufzentrum/backend/uploads/
+
 # Node modules & production build outputs
 node_modules/
 dist/

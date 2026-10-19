@@ -112,7 +112,9 @@ npm run dev
 ```
 
 ### 5. Image Uploads
-Posting an ad with an image first calls `/api/upload/image`, which uploads the file to an AWS S3 bucket with boto3. The project's original AWS setup has been decommissioned, so image uploads only work if you point the backend at a bucket of your own with the `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET` and `S3_REGION` environment variables. Without that the upload fails and the ad is not posted. Ads without an image still post.
+Posting an ad with an image first calls `/api/upload/image`. The project's original AWS setup has been decommissioned, so by default the backend saves the image in `einkaufzentrum/backend/uploads/` and serves it at `/api/upload/files/<name>`. This needs no AWS account and costs nothing, but the images only exist on the machine running the backend. Local uploads accept png, jpg, jpeg, gif and webp files.
+
+To use S3 instead, set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` for your own account, plus `S3_BUCKET` and `S3_REGION` for your bucket.
 
 ---
 
