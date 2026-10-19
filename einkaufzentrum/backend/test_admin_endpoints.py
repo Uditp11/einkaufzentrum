@@ -1,6 +1,12 @@
+import os
+
+# Use a throwaway in-memory database. This must be set before app is imported,
+# because Flask-SQLAlchemy creates the engine when the app is set up.
+os.environ["DATABASE_URL"] = "sqlite:///:memory:"
+
 import pytest
 from app import app, db
-from models import User, Item
+from models import User, Item, Report
 import json
 from datetime import datetime, timedelta
 import jwt
@@ -9,7 +15,6 @@ from config import Config
 @pytest.fixture(scope="module")
 def test_client():
     app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
     with app.test_client() as client:
         with app.app_context():
             db.create_all()
@@ -27,6 +32,9 @@ def test_client():
             item2 = Item(title="Approved Post", description="desc", price=20, category_id=1, seller_id=user.user_id, media_url="", status="Approved")
             item3 = Item(title="Scam Post", description="desc", price=30, category_id=1, seller_id=user.user_id, media_url="", status="Deleted")
             db.session.add_all([item1, item2, item3])
+            db.session.commit()
+            # Report the scam post and its seller
+            db.session.add(Report(reporter_id=admin.user_id, target_item_id=item3.item_id, target_user_id=user.user_id, reason="Scam"))
             db.session.commit()
         yield client
         with app.app_context():
@@ -71,66 +79,66 @@ def test_dashboard_counts_auth_required(test_client):
 
 def test_posts_pending_approval(test_client):
     token = get_admin_token()
-    resp = test_client.get('/api/admin/posts-awaiting-approval', headers=auth_header(token))
+    resp = test_client.get('/api/admin/items/pending', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert any(post['title'] == 'Pending Post' for post in data)
 
 def test_post_detail(test_client):
     token = get_admin_token()
-    resp = test_client.get('/api/admin/post/1', headers=auth_header(token))
+    resp = test_client.get('/api/admin/items/pending/1', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert data['title'] == 'Pending Post'
-    resp = test_client.get('/api/admin/post/999', headers=auth_header(token))
+    resp = test_client.get('/api/admin/items/pending/999', headers=auth_header(token))
     assert resp.status_code == 404
 
 def test_approve_post(test_client):
     token = get_admin_token()
     # Approve pending post
-    resp = test_client.post('/api/admin/post/1/approve', headers=auth_header(token))
+    resp = test_client.post('/api/admin/items/approve/1', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert 'approved' in data['message']
     # Approve already approved post
-    resp = test_client.post('/api/admin/post/2/approve', headers=auth_header(token))
+    resp = test_client.post('/api/admin/items/approve/2', headers=auth_header(token))
     assert resp.status_code == 200
 
 def test_reject_post(test_client):
     token = get_admin_token()
     # Reject a post
-    resp = test_client.post('/api/admin/post/2/reject', headers=auth_header(token), json={"reason": "Spam"})
+    resp = test_client.post('/api/admin/items/reject/2', headers=auth_header(token), json={"reason": "Spam"})
     assert resp.status_code == 200
     data = resp.get_json()
     assert 'rejected' in data['message']
     # Reject non-existent post
-    resp = test_client.post('/api/admin/post/999/reject', headers=auth_header(token), json={"reason": "Spam"})
+    resp = test_client.post('/api/admin/items/reject/999', headers=auth_header(token), json={"reason": "Spam"})
     assert resp.status_code == 404
 
 def test_reported_users(test_client):
     token = get_admin_token()
-    resp = test_client.get('/api/admin/reported-users', headers=auth_header(token))
+    resp = test_client.get('/api/admin/users/reported', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
-    assert isinstance(data, list)
+    assert any(u['name'] == 'Normal User' for u in data)
 
 def test_reported_user_detail(test_client):
     token = get_admin_token()
-    resp = test_client.get('/api/admin/reported-users/2', headers=auth_header(token))
+    resp = test_client.get('/api/admin/users/reported/2', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert data['name'] == 'Normal User'
-    resp = test_client.get('/api/admin/reported-users/999', headers=auth_header(token))
+    resp = test_client.get('/api/admin/users/reported/999', headers=auth_header(token))
     assert resp.status_code == 404
 
 def test_ban_user(test_client):
     token = get_admin_token()
-    resp = test_client.post('/api/admin/reported-users/2/ban', headers=auth_header(token))
+    resp = test_client.post('/api/admin/users/ban/2', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert 'banned' in data['message']
     # Ban non-existent user
-    resp = test_client.post('/api/admin/reported-users/999/ban', headers=auth_header(token))
+    resp = test_client.post('/api/admin/users/ban/999', headers=auth_header(token))
     assert resp.status_code == 404
 
 def test_delete_user(test_client):
@@ -142,17 +150,17 @@ def test_delete_user(test_client):
         db.session.add(user)
         db.session.commit()
         user_id = user.user_id
-    resp = test_client.delete(f'/api/admin/reported-users/{user_id}', headers=auth_header(token))
+    resp = test_client.delete(f'/api/admin/users/delete/{user_id}', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert 'deleted' in data['message']
     # Delete non-existent user
-    resp = test_client.delete('/api/admin/reported-users/999', headers=auth_header(token))
+    resp = test_client.delete('/api/admin/users/delete/999', headers=auth_header(token))
     assert resp.status_code == 404
 
 def test_posts_marked_scam(test_client):
     token = get_admin_token()
-    resp = test_client.get('/api/admin/posts-marked-scam', headers=auth_header(token))
+    resp = test_client.get('/api/admin/items/reported', headers=auth_header(token))
     assert resp.status_code == 200
     data = resp.get_json()
     assert any(post['title'] == 'Scam Post' for post in data) 

@@ -17,7 +17,8 @@ import requests
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 BACKEND_DIR = os.path.join(SCRIPT_DIR, "..", "backend")
 ML_DIR = os.path.join(SCRIPT_DIR)
-ML_PYTHON = os.path.join(ML_DIR, "venv", "Scripts", "python.exe")
+# Windows venvs keep python in Scripts, Linux and macOS in bin
+ML_PYTHON = os.path.join(ML_DIR, "venv", "Scripts", "python.exe") if os.name == "nt" else os.path.join(ML_DIR, "venv", "bin", "python")
 CLASSIFY_SCRIPT = os.path.join(ML_DIR, "classify_image.py")
 DATASET_DIR = os.path.join(ML_DIR, "fashion_mnist_dataset", "fashion_mnist")
 MODEL_PATH = os.path.join(ML_DIR, "spam_detection_model.keras")
@@ -76,7 +77,7 @@ for label, img_path in appropriate_files:
                 f"score={score:.4f}, is_spam={is_spam}"
             )
         else:
-            log(f"Label {label} image -> Appropriate", False, f"returncode={result.returncode}, stderr={result.stderr[:200]}")
+            log(f"Label {label} image -> Appropriate", False, f"returncode={result.returncode}, stdout={result.stdout[-300:]}, stderr={result.stderr[-200:]}")
     except Exception as e:
         log(f"Label {label} image -> Appropriate", False, str(e))
 
@@ -112,7 +113,7 @@ for label, img_path in spam_files:
                 f"score={score:.4f}, is_spam={is_spam}"
             )
         else:
-            log(f"Label {label} image -> Spam", False, f"returncode={result.returncode}, stderr={result.stderr[:200]}")
+            log(f"Label {label} image -> Spam", False, f"returncode={result.returncode}, stdout={result.stdout[-300:]}, stderr={result.stderr[-200:]}")
     except Exception as e:
         log(f"Label {label} image -> Spam", False, str(e))
 
@@ -230,3 +231,4 @@ else:
         if not p:
             print(f"    - {name}: {detail}")
 print("="*60 + "\n")
+sys.exit(1 if failed else 0)
